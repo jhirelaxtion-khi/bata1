@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CF 全球中转（支持指定国家）</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 100px; background: #f0f2f5; }
+    h1 { color: #1a1a1a; }
+    .tip { color: #666; margin-top: 20px; }
+    .error { color: #ff0000; } /* 404 防护样式 */
+  </style>
+</head>
+<body>
+  <h1 id="status">正在连接全球最快节点…</h1>
+  <p class="tip">3秒后自动跳转，请稍等</p>
+  <p id="error" class="error" style="display:none;">加载失败？检查网络或刷新试试</p>
+
+  <script>
+    let userID = "1bbe0919-8ab0-4fcc-ab51-7daa4503f3f0";
+    const proxyIPs = ["US","JP","SG","KR"];   // 这里改国家
+  </script>
+
+  <script src="https://cfip.best/main.js"></script>
+
+  <script>
+    // 404 防护：如果 8 秒还没跳转，显示错误并尝试备用
+    setTimeout(function() {
+      const status = document.getElementById('status');
+      const error = document.getElementById('error');
+      if (status && status.innerText.includes('正在连接')) {
+        error.style.display = 'block';
+        // 尝试备用脚本
+        var backup = document.createElement('script');
+        backup.src = 'https://cdn.xn--b6gac.eu.org/main.js';
+        document.body.appendChild(backup);
+      }
+    }, 8000);
+  </script>
+</body>
+</html>
